@@ -4,11 +4,10 @@
 generator client {
   provider = "prisma-client-js"
   binaryTargets = ["native", "darwin-arm64"]
-
 }
 
 datasource db {
-  provider     = "mysql"
+  provider     = "postgresql"
   url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
@@ -128,6 +127,6 @@ model Comment {
   votes CommentVote[]
   replies Comment[] @relation("ReplyTo")
   replyToId String?
-  replyTo Comment? @relation("ReplyTo", fields: [replyToId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  replyTo Comment? @relation("ReplyTo", fields: [replyToId], references: [id], onDelete: Restrict, onUpdate: Restrict)
 
 }
