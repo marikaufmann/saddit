@@ -21,7 +21,7 @@ const Layout = async ({
   if (!subsaddit) return notFound();
   const subscription = !session?.user
     ? undefined
-    : db.subscription.findFirst({
+    : await db.subscription.findFirst({
         where: {
           subsaddit: {
             name: slug,
