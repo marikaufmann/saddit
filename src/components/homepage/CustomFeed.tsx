@@ -13,18 +13,18 @@ const CustomFeed = async () => {
       userId: session?.user.id,
     },
     include: {
-      subsaddit: true,
+      subthreadit: true,
     },
   });
   const customPosts = await db.post.findMany({
     where: {
-      subsadditId: {
-        in: followedCommunities.map((community) => community.subsaddit.id),
+      subthreaditId: {
+        in: followedCommunities.map((community) => community.subthreadit.id),
       },
     },
     include: {
       author: true,
-      subsaddit: true,
+      subthreadit: true,
       comments: true,
       votes: true,
     },
@@ -36,7 +36,7 @@ const CustomFeed = async () => {
   const genPosts = await db.post.findMany({
     include: {
       author: true,
-      subsaddit: true,
+      subthreadit: true,
       comments: true,
       votes: true,
     },

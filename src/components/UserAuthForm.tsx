@@ -24,13 +24,15 @@ const UserAuthForm = () => {
   };
   return (
     <Button
+      variant="outline"
       isLoading={isLoading}
       size="sm"
       disabled={isLoading}
       type="button"
       onClick={loginWithGoogle}
-      className="w-full rounded-full font-semibold">
-      <Icons.google className="h-4 w-4 mr-2" />
+      className="w-full rounded-full font-semibold text-lg py-4"
+    >
+      <Icons.google className="h-5 w-5 mr-2" />
       Google
     </Button>
   );

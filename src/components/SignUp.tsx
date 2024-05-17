@@ -7,8 +7,8 @@ const SignIn = () => {
   return (
     <div className="mx-auto sm:w-[400px] w-full flex flex-col justify-center items-center gap-y-4 ">
       <div className="space-y-2  text-center">
-        <div className="relative h-12 w-12 mx-auto">
-          <Image fill alt="logo" src="/logo.png" className="rounded-sm" />
+        <div className="relative h-full w-32 mx-auto">
+          <img alt="logo" src="/logo.png" className="rounded-sm " />
         </div>
         <h1 className=" font-semibold text-2xl tracking-tight font-title">
           Sign Up
@@ -21,10 +21,11 @@ const SignIn = () => {
       <div className="gap-y-2 flex flex-col w-full">
         <UserAuthForm />
         <p className="text-sm text-muted-foreground text-center">
-          Already a sadditor?{" "}
+          Already a threaditor?{" "}
           <Link
             className="underline underline-offset-4 hover:text-zinc-900"
-            href="/sign-in">
+            href="/sign-in"
+          >
             Sign In
           </Link>
         </p>

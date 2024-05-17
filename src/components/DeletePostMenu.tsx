@@ -17,13 +17,16 @@ import { toast } from "./ui/use-toast";
 const DeletePostMenu = ({ postId }: { postId: string }) => {
   const loginToast = useCustomToasts();
   const router = useRouter();
-	const pathname = usePathname()
+  const pathname = usePathname();
   const { mutate: deletePost } = useMutation({
     mutationFn: async ({ postId }: DeletePostRequest) => {
       const payload: DeletePostRequest = {
         postId,
       };
-      const { data } = await axios.patch("/api/subsaddit/post/delete", payload);
+      const { data } = await axios.patch(
+        "/api/subthreadit/post/delete",
+        payload
+      );
       return data;
     },
     onError: (err) => {
@@ -41,7 +44,7 @@ const DeletePostMenu = ({ postId }: { postId: string }) => {
     onSuccess: () => {
       const newPathName = pathname.split("/").slice(0, -2).join("/");
       router.push(newPathName);
-			return toast({
+      return toast({
         title: "Your post has been deleted successfully.",
         variant: "default",
       });
@@ -55,7 +58,8 @@ const DeletePostMenu = ({ postId }: { postId: string }) => {
       <DropdownMenuContent className="w-fit" align="end">
         <DropdownMenuItem
           onClick={() => deletePost({ postId })}
-          className="text-xs text-zinc-900 cursor-pointer">
+          className="text-xs text-zinc-900 cursor-pointer"
+        >
           Delete
         </DropdownMenuItem>
       </DropdownMenuContent>

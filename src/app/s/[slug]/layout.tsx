@@ -13,17 +13,17 @@ const Layout = async ({
   params: { slug: string };
 }) => {
   const session = await getAuthSession();
-  const subsaddit = await db.subsaddit.findFirst({
+  const subthreadit = await db.subthreadit.findFirst({
     where: {
       name: slug,
     },
   });
-  if (!subsaddit) return notFound();
+  if (!subthreadit) return notFound();
   const subscription = !session?.user
     ? undefined
     : await db.subscription.findFirst({
         where: {
-          subsaddit: {
+          subthreadit: {
             name: slug,
           },
           userId: session?.user.id,
@@ -31,7 +31,7 @@ const Layout = async ({
       });
   const memberCount = await db.subscription.count({
     where: {
-      subsaddit: {
+      subthreadit: {
         name: slug,
       },
     },
@@ -39,14 +39,14 @@ const Layout = async ({
   const isSubscribed = !!subscription;
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4">
-      <ul className="col-span-2 space-y-6">{children}</ul>
-      <About
-        session={session}
-        slug={slug}
-        subsaddit={subsaddit}
-        isSubscribed={isSubscribed}
-        memberCount={memberCount}
-      />
+      <ul className="col-span-2 space-y-6 z-10">{children}</ul>
+        <About
+          session={session}
+          slug={slug}
+          subthreadit={subthreadit}
+          isSubscribed={isSubscribed}
+          memberCount={memberCount}
+        />
     </div>
   );
 };

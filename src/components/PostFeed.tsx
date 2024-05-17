@@ -8,12 +8,13 @@ import axios from "axios";
 import Post from "./Post";
 import { useSession } from "next-auth/react";
 import { Loader2 } from "lucide-react";
+
 const PostFeed = ({
   initialPosts,
-  subsadditName,
+  subthreaditName,
 }: {
   initialPosts: ExtendedPost[];
-  subsadditName?: string;
+  subthreaditName?: string;
 }) => {
   const { data: session } = useSession();
   const lastPostRef = useRef(null);
@@ -26,7 +27,7 @@ const PostFeed = ({
     async ({ pageParam = 1 }) => {
       const query =
         `/api/posts?limit=${INFINITE_SCROLL_PAGINATION_RESULTS}&page=${pageParam}` +
-        (subsadditName ? `&subsadditName=${subsadditName}` : "");
+        (subthreaditName ? `&subthreaditName=${subthreaditName}` : "");
       const { data } = await axios.get(query);
       return data as ExtendedPost[];
     },
@@ -35,7 +36,7 @@ const PostFeed = ({
         return pages.length + 1;
       },
       initialData: { pages: [initialPosts], pageParams: [1] },
-    },
+    }
   );
   useEffect(() => {
     if (entry?.isIntersecting) {
@@ -44,7 +45,7 @@ const PostFeed = ({
   }, [entry, fetchNextPage]);
   const posts = data?.pages.flatMap((page) => page) ?? initialPosts;
   return (
-    <ul className="flex flex-col space-y-6 col-span-2">
+    <ul className="flex flex-col space-y-6 col-span-2 z-10">
       {posts.map((post, index) => {
         const votesAmt = post.votes.reduce((acc, vote) => {
           if (vote.type === "UP") return acc + 1;
@@ -52,7 +53,7 @@ const PostFeed = ({
           return acc;
         }, 0);
         const currentVote = post.votes.find(
-          (vote) => vote.userId === session?.user.id,
+          (vote) => vote.userId === session?.user.id
         );
         if (index === posts.length - 1) {
           return (
@@ -62,7 +63,7 @@ const PostFeed = ({
                 votesAmt={votesAmt}
                 commentsAmt={post.comments.length}
                 post={post}
-                subsadditName={subsadditName || null}
+                subthreaditName={subthreaditName || null}
               />
             </li>
           );
@@ -74,7 +75,7 @@ const PostFeed = ({
                 votesAmt={votesAmt}
                 commentsAmt={post.comments.length}
                 post={post}
-                subsadditName={subsadditName || null}
+                subthreaditName={subthreaditName || null}
               />
             </li>
           );
@@ -82,7 +83,7 @@ const PostFeed = ({
       })}
       {isFetchingNextPage && (
         <li className="flex justify-center">
-          <Loader2 className="w-6 h-6 animate-spin text-[#76aecc]" />
+          <Loader2 className="w-6 h-6 animate-spin text-[#FFA2B6]" />
         </li>
       )}
     </ul>

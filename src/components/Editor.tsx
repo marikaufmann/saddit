@@ -13,7 +13,7 @@ import type EditorJS from "@editorjs/editorjs";
 
 import "@/styles/editor.css";
 
-const Editor = ({ subsadditId }: { subsadditId: string }) => {
+const Editor = ({ subthreaditId }: { subthreaditId: string }) => {
   const {
     register,
     formState: { errors },
@@ -22,7 +22,7 @@ const Editor = ({ subsadditId }: { subsadditId: string }) => {
     defaultValues: {
       title: "",
       content: null,
-      subsadditId,
+      subthreaditId,
     },
     resolver: zodResolver(PostValidator),
   });
@@ -98,10 +98,13 @@ const Editor = ({ subsadditId }: { subsadditId: string }) => {
     mutationFn: async ({
       title,
       content,
-      subsadditId,
+      subthreaditId,
     }: PostCreationRequest) => {
-      const payload: PostCreationRequest = { title, content, subsadditId };
-      const { data } = await axios.post("/api/subsaddit/post/create", payload);
+      const payload: PostCreationRequest = { title, content, subthreaditId };
+      const { data } = await axios.post(
+        "/api/subthreadit/post/create",
+        payload
+      );
       return data;
     },
     onError: (err) => {
@@ -135,7 +138,7 @@ const Editor = ({ subsadditId }: { subsadditId: string }) => {
     const payload: PostCreationRequest = {
       title: data.title,
       content: blocks,
-      subsadditId,
+      subthreaditId,
     };
     createPost(payload);
   };
@@ -161,11 +164,12 @@ const Editor = ({ subsadditId }: { subsadditId: string }) => {
     }
   }, [isMounted, initializeEditor]);
   return (
-    <div className="rounded-lg border border-zinc-200 bg-[#f7fcff] w-full p-4">
+    <div className="rounded-lg border border-zinc-200 bg-[#f2f1ef] w-full p-4">
       <form
-        id="subsaddit-post-form"
+        id="subthreadit-post-form"
         className="w-fit"
-        onSubmit={handleSubmit(onSubmit)}>
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <TextareaAutosize
           className="w-full resize-none overflow-hidden appearance-none bg-transparent text-5xl font-bold focus:outline-none"
           placeholder="Title"

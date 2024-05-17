@@ -1,5 +1,6 @@
 import DeletePostMenu from "@/components/DeletePostMenu";
 import EditorOutput from "@/components/EditorOutput";
+import Icons from "@/components/Icons";
 import CommentSection from "@/components/comments/CommentSection";
 import PostVoteServer from "@/components/post-vote/PostVoteServer";
 import { Button } from "@/components/ui/Button";
@@ -28,7 +29,7 @@ const page = async ({ params: { postId } }: { params: { postId: string } }) => {
   if (!post) return notFound();
 
   return (
-    <div className="rounded-md shadow overflow-hidden bg-[#f7fcff]">
+    <div className="rounded-md shadow overflow-hidden bg-[#f2f1ef]">
       <div className="flex flex-col sm:flex-row py-2 max-sm:pl-4">
         <div className="max-sm:order-last max-sm:py-1">
           <Suspense fallback={<PostVotesFallback />}>
@@ -85,11 +86,15 @@ const PostVotesFallback = () => {
   return (
     <div className="flex md:flex-col md:w-14  items-center">
       <Button variant={"ghost"} size="sm" aria-label="upvote">
-        <ArrowBigUp className={`text-zinc-700 w-6 h-6 `} />
+      <Icons.heart
+          className="text-zinc-700 w-6 h-6"
+        />
       </Button>
       <Loader2 className=" w-4 h-4 text-center text-zinc-900 md:text-base text-sm font-medium animate-spin md:mb-1 md:mt-1" />
       <Button variant={"ghost"} size="sm" aria-label="downvote">
-        <ArrowBigDown className={`text-zinc-700  w-6 h-6 `} />
+      <Icons.heart
+          className="text-zinc-700 scale-y-[-1] w-6 h-6"
+        />
       </Button>
     </div>
   );

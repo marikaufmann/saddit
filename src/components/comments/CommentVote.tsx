@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "../ui/use-toast";
 import useCustomToasts from "@/hooks/use-custom-toast";
 import { usePrevious } from "@mantine/hooks";
+import Icons from "../Icons";
 const CommentVote = ({
   initialVote,
   initialVotesAmt,
@@ -22,7 +23,7 @@ const CommentVote = ({
   const router = useRouter();
   const loginToast = useCustomToasts();
   const [currentVote, setCurrentVote] = useState<VoteType | undefined>(
-    initialVote?.type,
+    initialVote?.type
   );
   const [votesAmt, setVotesAmt] = useState(initialVotesAmt);
   const prevVote = usePrevious(currentVote);
@@ -34,8 +35,8 @@ const CommentVote = ({
         commentId,
       };
       const { data } = await axios.patch(
-        "/api/subsaddit/post/comment/vote",
-        payload,
+        "/api/subthreadit/post/comment/vote",
+        payload
       );
       return data;
     },
@@ -76,7 +77,7 @@ const CommentVote = ({
         if (type === "UP") setVotesAmt((prev) => prev - 1);
         if (type === "DOWN") setVotesAmt((prev) => prev + 1);
       } else {
-				setCurrentVote(type)
+        setCurrentVote(type);
         if (type === "UP") setVotesAmt((prev) => prev + (currentVote ? 2 : 1));
         if (type === "DOWN")
           setVotesAmt((prev) => prev - (currentVote ? 2 : 1));
@@ -87,26 +88,36 @@ const CommentVote = ({
     <div className="flex items-center ">
       <Button
         variant={"ghost"}
-				aria-label="upvote"
+        aria-label="upvote"
         size="xs"
         onClick={() => vote("UP")}
-        className="">
-        <ArrowBigUp
+        className=""
+      >
+        
+        <Icons.heart
+        
           className={`h-5 w-5 text-gray-500 ${
-            currentVote === "UP" && " fill-sky-300"
+            currentVote === "UP" && " fill-[#D6536D] text-rose-800"
           }`}
         />
+   
       </Button>
       <span className="text-sm text-center font-medium text-zinc-900">
         {votesAmt}
       </span>
-				
-      <Button   size="xs" aria-label="downvote" variant={"ghost"} onClick={() => vote("DOWN")}>
-        <ArrowBigDown
-          className={`h-5 w-5 text-gray-500  ${
-            currentVote === "DOWN" && " fill-indigo-900 "
+
+      <Button
+        size="xs"
+        aria-label="downvote"
+        variant={"ghost"}
+        onClick={() => vote("DOWN")}
+      >
+        <Icons.heart
+          className={`h-5 w-5 text-gray-500 scale-y-[-1]  ${
+            currentVote === "DOWN" && " fill-[#F2CB74] text-[#F2CB74] "
           }`}
         />
+  
       </Button>
     </div>
   );

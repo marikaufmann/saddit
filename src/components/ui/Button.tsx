@@ -8,13 +8,15 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-[#015281] text-[#f7fcff] hover:bg-[#015281]/90 font-semibold",
-        destructive: "text-white hover:bg-red-600 dark:hover:bg-red-600 font-semibold",
+        default:
+          "bg-[#D6536D] text-[#f2f1ef] hover:bg-[#D6536D]/90 font-semibold",
+        destructive:
+          "text-white hover:bg-red-600 dark:hover:bg-red-600 font-semibold",
         outline:
-          "bg-zinc-100 text-[#015281] hover:bg-[#015281]/10 border border-[#015281] rounded-full font-semibold",
+          "bg-zinc-100 text-[#D6536D] hover:bg-[#D6536D]/10 border border-[#D6536D] rounded-full font-semibold",
         subtle: "hover:bg-zinc-200 bg-zinc-100 text-zinc-900 font-semibold",
         ghost:
-          "font-semibold bg-transparent hover:bg-[#015281]/10 text-zinc-800 data-[state=open]:bg-transparent data-[state=open]:bg-transparent",
+          "font-semibold bg-transparent hover:bg-[#D6536D]/10 text-zinc-800 data-[state=open]:bg-transparent data-[state=open]:bg-transparent",
         link: "bg-transparent dark:bg-transparent underline-offset-4 hover:underline text-slate-900 dark:text-slate-100 hover:bg-transparent dark:hover:bg-transparent",
       },
       size: {
@@ -46,7 +48,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={isLoading}
         {...props}
       >
-        {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+        {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin " /> : null}
         {children}
       </button>
     );

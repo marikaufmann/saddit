@@ -17,7 +17,7 @@ const page = async ({
   };
 }) => {
   const session = await getAuthSession();
-  const subsaddit = await db.subsaddit.findFirst({
+  const subthreadit = await db.subthreadit.findFirst({
     where: { name: slug },
     include: {
       posts: {
@@ -25,7 +25,7 @@ const page = async ({
           author: true,
           votes: true,
           comments: true,
-          subsaddit: true,
+          subthreadit: true,
         },
         orderBy: {
           createdAt: "desc",
@@ -34,12 +34,12 @@ const page = async ({
       },
     },
   });
-  if (!subsaddit) return notFound();
+  if (!subthreadit) return notFound();
   const subscription = !session?.user
     ? undefined
     : await db.subscription.findFirst({
         where: {
-          subsadditId: subsaddit?.id,
+          subthreaditId: subthreadit?.id,
           userId: session?.user.id,
         },
       });
@@ -51,9 +51,9 @@ const page = async ({
           <h1 className="font-title font-semibold text-3xl">
             {slug.slice(0, 1).toUpperCase() + slug.slice(1)}
           </h1>
-          {subsaddit?.creatorId !== session?.user.id ? (
+          {subthreadit?.creatorId !== session?.user.id ? (
             <SubscribeLeaveToggle
-              subsaddit={subsaddit!}
+              subthreadit={subthreadit!}
               isSubscribed={isSubscribed}
             />
           ) : null}
@@ -61,10 +61,10 @@ const page = async ({
         <h3 className="text-gray-500 text-sm font-title">s/{slug}</h3>
       </li>
       <MiniCreatePost session={session} />
-      {subsaddit.posts.length > 0 ? (
+      {subthreadit.posts.length > 0 ? (
         <PostFeed
-          initialPosts={subsaddit.posts}
-          subsadditName={subsaddit.name}
+          initialPosts={subthreadit.posts}
+          subthreaditName={subthreadit.name}
         />
       ) : (
         <div className="text-center mt-6">

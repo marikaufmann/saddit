@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/Toaster";
 import "@/styles/globals.css";
 
 export const metadata = {
-  title: "Saddit - mostly sad",
+  title: "Threadit - thread together",
   description: "A Reddit clone built with Next.js and TypeScript.",
 };
 export default function RootLayout({
@@ -16,12 +16,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="bg-white font-noto antialiased light">
-      <body className="bg-[#eff9ff] min-h-screen antialiased text-slate-900 pt-12">
+      <body className="bg-[#edecea] min-h-screen antialiased text-slate-900 pt-12">
         <Providers>
           {/* @ts-expect-error Server Component*/}
           <Navbar />
           {authModal}
-          <div className="max-w-7xl mx-auto md:container sm:px-4 px-2 pt-12">{children}</div>
+          <div className="max-w-7xl mx-auto md:container sm:px-4 px-2 pt-12 ">
+            <div className="fixed inset-0 w-full h-full">
+              <img
+                alt="bg-image"
+                src="/texture-bg.jpeg"
+                className="opacity-[7%] object-cover w-full h-full "
+              />
+            </div>
+            {children}
+          </div>
         </Providers>
         <Toaster />
       </body>

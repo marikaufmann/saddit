@@ -72,8 +72,8 @@ const UserSettingsForm = ({
     },
   });
   return (
-    <form onSubmit={handleSubmit((e) => changeUsername(e))}>
-      <Card className="bg-[#f7fcff]">
+    <form onSubmit={handleSubmit((e) => changeUsername(e))} className="z-10">
+      <Card className="bg-[#f2f1ef]">
         <CardHeader>
           <CardTitle>Your username</CardTitle>
           <CardDescription>

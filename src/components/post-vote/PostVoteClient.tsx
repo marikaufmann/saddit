@@ -9,6 +9,7 @@ import useCustomToasts from "@/hooks/use-custom-toast";
 import { toast } from "../ui/use-toast";
 import { usePrevious } from "@mantine/hooks";
 import { PostVoteRequest } from "@/lib/validators/vote";
+import Icons from "../Icons";
 
 const PostVoteClient = ({
   initialVotesAmt,
@@ -34,7 +35,7 @@ const PostVoteClient = ({
         postId,
         voteType: type,
       };
-      const { data } = await axios.patch("/api/subsaddit/post/vote", payload);
+      const { data } = await axios.patch("/api/subthreadit/post/vote", payload);
       return data;
     },
     onError: (err, voteType) => {
@@ -88,10 +89,12 @@ const PostVoteClient = ({
         variant={"ghost"}
         onClick={() => vote("UP")}
         size="sm"
-        aria-label="upvote">
-        <ArrowBigUp
+        aria-label="upvote"
+      >
+        
+        <Icons.heart
           className={`text-gray-500 w-6 h-6${
-            currentVote === "UP" && "bg-sky-300 fill-sky-300"
+            currentVote === "UP" && " fill-[#D6536D] text-rose-800"
           }`}
         />
       </Button>
@@ -102,10 +105,12 @@ const PostVoteClient = ({
         variant={"ghost"}
         onClick={() => vote("DOWN")}
         size="sm"
-        aria-label="downvote">
-        <ArrowBigDown
-          className={`text-gray-500  w-6 h-6${
-            currentVote === "DOWN" && "bg-indigo-900 fill-indigo-900"
+        aria-label="downvote"
+      >
+        <Icons.heart
+          className={`text-gray-500 scale-y-[-1] w-6 h-6 ${
+            currentVote === "DOWN" &&
+            " fill-[#F2CB74] text-[#F2CB74]"
           }`}
         />
       </Button>

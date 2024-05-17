@@ -28,7 +28,10 @@ const CreateComment = ({
         postId,
         replyToId,
       };
-      const { data } = await axios.patch("/api/subsaddit/post/comment", payload);
+      const { data } = await axios.patch(
+        "/api/subthreadit/post/comment",
+        payload
+      );
       return data;
     },
     onError: (err) => {
@@ -61,7 +64,8 @@ const CreateComment = ({
         <Button
           isLoading={isLoading}
           disabled={input.length === 0}
-          onClick={() => comment({ postId, text: input, replyToId })}>
+          onClick={() => comment({ postId, text: input, replyToId })}
+        >
           Comment
         </Button>
       </div>

@@ -7,7 +7,7 @@ const GeneralFeed = async () => {
   const posts = await db.post.findMany({
     include: {
       author: true,
-      subsaddit: true,
+      subthreadit: true,
       comments: true,
       votes: true,
     },
@@ -16,7 +16,7 @@ const GeneralFeed = async () => {
       createdAt: "desc",
     },
   });
-  return <PostFeed initialPosts={posts}/>
+  return <PostFeed initialPosts={posts} />;
 };
 
 export default GeneralFeed;

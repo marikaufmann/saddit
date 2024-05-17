@@ -1,31 +1,31 @@
 "use client";
-import { Subsaddit } from "@prisma/client";
+import { Subthreadit } from "@prisma/client";
 import { useMutation } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import React, { startTransition } from "react";
 import { Button } from "./ui/Button";
 import { toast } from "./ui/use-toast";
-import { SubscribeToSubsadditPayload } from "@/lib/validators/subsaddit";
+import { SubscribeToSubthreaditPayload } from "@/lib/validators/subthreadit";
 import useCustomToasts from "@/hooks/use-custom-toast";
 import { useRouter } from "next/navigation";
 
 const SubscribeLeaveToggle = ({
-  subsaddit,
+  subthreadit,
   isSubscribed,
-	props
+  props,
 }: {
-  subsaddit: Subsaddit;
+  subthreadit: Subthreadit;
   isSubscribed: boolean;
-	props?: string
+  props?: string;
 }) => {
   const router = useRouter();
   const loginToast = useCustomToasts();
   const { mutate: subscribe, isLoading: isSubscribeLoading } = useMutation({
     mutationFn: async () => {
-      const payload: SubscribeToSubsadditPayload = {
-        subsadditId: subsaddit.id,
+      const payload: SubscribeToSubthreaditPayload = {
+        subthreaditId: subthreadit.id,
       };
-      const { data } = await axios.post("/api/subsaddit/subscribe", payload);
+      const { data } = await axios.post("/api/subthreadit/subscribe", payload);
       return data as string;
     },
     onError: (err) => {
@@ -46,17 +46,20 @@ const SubscribeLeaveToggle = ({
       });
       toast({
         title: "Subscribed!",
-        description: `You are now subscribed to s/${subsaddit.name}`,
+        description: `You are now subscribed to s/${subthreadit.name}`,
         variant: "default",
       });
     },
   });
   const { mutate: unsubscribe, isLoading: isUnsubscribeLoading } = useMutation({
     mutationFn: async () => {
-      const payload: SubscribeToSubsadditPayload = {
-        subsadditId: subsaddit.id,
+      const payload: SubscribeToSubthreaditPayload = {
+        subthreaditId: subthreadit.id,
       };
-      const { data } = await axios.post("/api/subsaddit/unsubscribe", payload);
+      const { data } = await axios.post(
+        "/api/subthreadit/unsubscribe",
+        payload
+      );
       return data as string;
     },
     onError: (err: AxiosError) => {
@@ -72,7 +75,7 @@ const SubscribeLeaveToggle = ({
       });
       toast({
         title: "Unsubscribed!",
-        description: `You are no longer a member of s/${subsaddit.name}`,
+        description: `You are no longer a member of s/${subthreadit.name}`,
         variant: "default",
       });
     },
@@ -84,7 +87,8 @@ const SubscribeLeaveToggle = ({
           isLoading={isSubscribeLoading}
           className={`px-10 ${props}`}
           variant="outline"
-          onClick={() => subscribe()}>
+          onClick={() => subscribe()}
+        >
           Join
         </Button>
       ) : (
@@ -92,7 +96,8 @@ const SubscribeLeaveToggle = ({
           isLoading={isUnsubscribeLoading}
           className={`px-10 ${props}`}
           variant="outline"
-          onClick={() => unsubscribe()}>
+          onClick={() => unsubscribe()}
+        >
           Leave
         </Button>
       )}

@@ -12,9 +12,9 @@ const page = async () => {
     redirect(authOptions?.pages?.signIn || "/sign-in");
   }
   return (
-    <div className="py-12 max-w-4xl mx-auto flex flex-col gap-8">
+    <div className="py-12 max-w-4xl mx-auto flex flex-col gap-8 ">
       <h1 className="text-3xl font-bold md:text-4xl font-title">Settings</h1>
-      <div>
+      <div className="z-10">
         <UserSettingsForm
           user={{
             username: session?.user?.username || "",

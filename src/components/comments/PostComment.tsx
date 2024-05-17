@@ -54,8 +54,8 @@ const PostComment = ({
         commentId,
       };
       const { data } = await axios.patch(
-        "/api/subsaddit/post/comment/delete",
-        payload,
+        "/api/subthreadit/post/comment/delete",
+        payload
       );
       return data;
     },
@@ -87,8 +87,8 @@ const PostComment = ({
         replyToId,
       };
       const { data } = await axios.patch(
-        "/api/subsaddit/post/comment",
-        payload,
+        "/api/subthreadit/post/comment",
+        payload
       );
       return data;
     },
@@ -139,7 +139,8 @@ const PostComment = ({
             <DropdownMenuContent className="w-fit" align="end">
               <DropdownMenuItem
                 onClick={() => deleteComment({ commentId: comment.id })}
-                className="text-xs text-zinc-900 cursor-pointer">
+                className="text-xs text-zinc-900 cursor-pointer"
+              >
                 Delete
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -167,7 +168,8 @@ const PostComment = ({
             setIsReplying(true);
           }}
           variant={"ghost"}
-          className="text-gray-500 text-xs font-medium">
+          className="text-gray-500 text-xs font-medium"
+        >
           <MessageSquare className="h-4 w-4 text-gray-500 mr-1.5 -ml-2" />
           <span className="">Reply</span>
         </Button>
@@ -187,7 +189,8 @@ const PostComment = ({
               variant={"subtle"}
               onClick={() => {
                 setIsReplying(false);
-              }}>
+              }}
+            >
               Cancel
             </Button>
             <Button
@@ -199,7 +202,8 @@ const PostComment = ({
                   text: input,
                   replyToId: comment.replyToId ?? comment.id,
                 });
-              }}>
+              }}
+            >
               Comment
             </Button>
           </div>
