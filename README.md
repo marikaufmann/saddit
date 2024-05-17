@@ -1,5 +1,5 @@
-# Modern Fullstack Reddit Clone for sad people
-This app is mainly for depressive communities 🩹
+# Fullstack Reddit Clone solely dedicated to melancholic communities
+You are welcome to share your thoughts 🩹
 
 ![saddit-preview](https://github.com/marikaufmann/saddit/assets/108984289/f72b108c-5cfc-4220-bd0e-9a404ca5e185)
 
